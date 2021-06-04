@@ -25,10 +25,10 @@ namespace API.Data
             throw new System.NotImplementedException();
         }
 
-        public async Task<MemberDto> GetMemberAsync(string userName)
+        public async Task<MemberDto> GetMemberAsync(string username)
         {
             return await _context.Users
-                .Where(x => x.UserName == userName)
+                .Where(x => x.Username == username)
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
         }
@@ -49,7 +49,7 @@ namespace API.Data
         {
             return await _context.Users
                 .Include(p => p.Photos)
-                .SingleOrDefaultAsync(x => x.UserName == username);
+                .SingleOrDefaultAsync(x => x.Username == username);
         }
 
         public async Task<IEnumerable<AppUser>> GetUsersAsync()
