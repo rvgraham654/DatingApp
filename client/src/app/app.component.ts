@@ -8,12 +8,11 @@ import { AccountService } from './_services/account.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-
 export class AppComponent implements OnInit {
-  title = 'The New Dating App';
+  title = 'The Dating app';
   users: any;
 
-  constructor(private accountService: AccountService){}
+  constructor(private accountService: AccountService) {}
 
   ngOnInit() {
     this.setCurrentUser();
@@ -23,5 +22,4 @@ export class AppComponent implements OnInit {
     const user: User = JSON.parse(localStorage.getItem('user'));
     this.accountService.setCurrentUser(user);
   }
-
 }
