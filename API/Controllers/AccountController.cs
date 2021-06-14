@@ -46,7 +46,8 @@ namespace API.Controllers
             {
                 Username = user.Username,
                 Token = _tokenService.CreateToken(user),
-                KnownAs = user.KnownAs
+                KnownAs = user.KnownAs,
+                Gender = user.Gender
             };
         }
 
@@ -60,7 +61,7 @@ namespace API.Controllers
         {
             var user = await _context.Users
                 .Include(p => p.Photos)
-                .SingleOrDefaultAsync(x => x.Username == loginDto.Username);
+                .SingleOrDefaultAsync(x => x.Username == loginDto.Username.ToLower());
 
             if (user == null) return Unauthorized("Username not found");
 
@@ -77,7 +78,8 @@ namespace API.Controllers
                 Username = user.Username,
                 Token = _tokenService.CreateToken(user),
                 PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
-                KnownAs = user.KnownAs
+                KnownAs = user.KnownAs,
+                Gender = user.Gender
             };
         }
     }
